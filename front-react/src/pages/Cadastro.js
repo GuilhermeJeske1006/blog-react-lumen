@@ -2,25 +2,30 @@ import { Link } from 'react-router-dom';
 import Form from '../components/form';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import {  toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   function listar() {
+    setLoading(true);
     fetch('http://localhost:8000/public/blog')
       .then((data) => data.json())
       .then((response) => {
         setBlogs(response.blog);
         setLoading(false);
-    console.log(blogs, 'blogs')
+        toast.success("Blogs carregados com sucesso!");
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        // Handle the error (e.g., display an error message to the user)
+        setLoading(false);
+        toast.error("Erro ao carregar blogs!");
       });
   }
-  
+
   const handleSubmit = (formData) => {
     fetch('http://localhost:8000/public/blog/store', {
       method: 'POST',
@@ -32,13 +37,14 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Data submitted successfully:', data);
-        })
+        toast.success("Blog cadastrado com sucesso!");
+        // Optionally, you can redirect the user or perform other actions upon successful submission
+      })
       .catch((error) => {
         console.error('Error submitting data:', error);
+        toast.error("Erro ao cadastrar blog!");
       });
   };
-  
-
 
   useEffect(() => {
     listar();

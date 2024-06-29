@@ -14,7 +14,7 @@ class CategoriaController extends Controller
     public function index()
     {
         return response()->json([
-            'categoria' => Categoria::with('blogs')->get()
+            'categoria' => Categoria::all()
         ], 200);
     }
 

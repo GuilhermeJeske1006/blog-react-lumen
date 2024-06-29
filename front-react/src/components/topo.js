@@ -32,7 +32,7 @@ function BrandExample() {
               <Nav.Link href="/">Home</Nav.Link>
             </Nav.Item>
             <Dropdown>
-            <Dropdown.Toggle>Categories</Dropdown.Toggle>
+            <Dropdown.Toggle>Categorias</Dropdown.Toggle>
             <Dropdown.Menu>
                 {Array.isArray(categorias) && categorias.length > 0
                 ? categorias.map((categoria) => (
